@@ -58,10 +58,21 @@ Since drivers are independent, we provide a test driver which can be used to tes
 
 ```javascript
 import Aligner, { optimizers, drivers } from '@kcerb/aligner';
-
-const testDriver = new drivers.TestDriver('guass-3d');
+// test driver will select initial position at random within bounds given by min and max
+const testDriver = new drivers.TestDriver('guass-3d', {
+    min: [-1, -1, -1],
+    max: [1, 1, 1]
+});
 const nelderMead = new optimizers.NelderMead(testDriver.nCoords, {minTolerance: 1e-9, maxIterations: 100});
 const laser1Aligner = new Aligner(nelderMead, testDriver);
 
 laser1Aligner.align().then( () => console.log(laser1Aligner.stats));
 ```
+
+## ToDo
+
+Next steps:
+
+1. Add more support for real drivers such as minimum/maximum step-size.
+2. Bloat dependencies a bit for real development (code coverage, linter/style, fancier test suite, actual publication process to npm).
+3. Add visual and other debug tools to help user explore different optimizers effectiveness in aligning a given system.

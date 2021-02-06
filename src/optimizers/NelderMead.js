@@ -132,10 +132,10 @@ export default class NelderMead {
     this.zeroDelta = parameters.zeroDelta || 0.001;
     this.minErrorDelta = parameters.minErrorDelta || 1e-6;
     this.minTolerance = parameters.minErrorDelta || 1e-5;
-    this.rho = (parameters.rho !== undefined) ? parameters.rho : 1;
-    this.chi = (parameters.chi !== undefined) ? parameters.chi : 2;
-    this.psi = (parameters.psi !== undefined) ? parameters.psi : -0.5;
-    this.sigma = (parameters.sigma !== undefined) ? parameters.sigma : 0.5;
+    this.rho = (parameters.rho !== undefined) ? parameters.rho : 1; // reflection
+    this.chi = (parameters.chi !== undefined) ? parameters.chi : 2; // expansion
+    this.psi = (parameters.psi !== undefined) ? parameters.psi : -0.5; // contraction
+    this.sigma = (parameters.sigma !== undefined) ? parameters.sigma : 0.5; // reduction
   }
   
   sortSimplex () {
