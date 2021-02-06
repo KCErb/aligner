@@ -22,7 +22,7 @@ by choosing the optimization algorithm we'd like to use and the driver.
 import { myDriver } from '@my-company/drivers';
 import Aligner, { optimizers } from '@kcerb/aligner';
 
-const nelderMead = new optimizers.NelderMead({tol: 1e-9, maxIter: 100});
+const nelderMead = new optimizers.NelderMead(myDriver.nCoords, {minTolerance: 1e-9, maxIterations: 100});
 const laser1Aligner = new Aligner(nelderMead, myDriver);
 
 laser1Aligner.align().then( () => console.log(laser1Aligner.stats));
@@ -59,8 +59,8 @@ Since drivers are independent, we provide a test driver which can be used to tes
 ```javascript
 import Aligner, { optimizers, drivers } from '@kcerb/aligner';
 
-const nelderMead = new optimizers.NelderMead({tol: 1e-9, maxIter: 100});
-const testDriver = new drivers.TestDriver();
+const testDriver = new drivers.TestDriver('guass-3d');
+const nelderMead = new optimizers.NelderMead(testDriver.nCoords, {minTolerance: 1e-9, maxIterations: 100});
 const laser1Aligner = new Aligner(nelderMead, testDriver);
 
 laser1Aligner.align().then( () => console.log(laser1Aligner.stats));
