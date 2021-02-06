@@ -21,9 +21,7 @@ import Aligner, { optimizers } from '@kcerb/aligner';
 const nelderMead = new optimizers.NelderMead({tol: 1e-9, maxIter: 100});
 const laser1Aligner = new Aligner(nelderMead, myDriver);
 
-laser1Aligner.align();
-
-console.log(laser1Aligner.stats);
+laser1Aligner.align().then( () => console.log(laser1Aligner.stats));
 ```
 
 As long as the driver and optimizer implement the right interfaces, the `align` call will
@@ -61,7 +59,5 @@ const nelderMead = new optimizers.NelderMead({tol: 1e-9, maxIter: 100});
 const testDriver = new drivers.TestDriver();
 const laser1Aligner = new Aligner(nelderMead, testDriver);
 
-laser1Aligner.align();
-
-console.log(laser1Aligner.stats);
+laser1Aligner.align().then( () => console.log(laser1Aligner.stats));
 ```
