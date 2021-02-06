@@ -24,8 +24,8 @@ export default class Aligner {
    * Perform alignment loop between optimizer and driver.
    */
   async align () {
-    let coordVec = this.driver.currentCoords;
     this.stats.measurements++
+    let coordVec = this.driver.currentCoords;
     let measurement = await this.driver.measureAt(coordVec);
     const funcGenerator = this.optimizer.generator(measurement, coordVec);
     
