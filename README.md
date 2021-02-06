@@ -2,12 +2,16 @@
 
 A little tool for aligning things! This is a demo of tool that could be used to perform physical search space problems
 where some set of coordinates describe the current alignment of the system and try to find a better alignment given
-some kind of measure of the goodness of the current alignment. Since alignment/positioning problems can be pretty domain
-specific, it's probably better to use the `Aligner` here as a parent and have your subclass implement introspective logic
-to match the domain. For example, the 'laser' alignment demo in this readme, may in real life, need to wait a certain
-dwell time between measurements to allow transient vibrations to damp out sufficiently. This may depend on the step size as
-well. In that case, a `class LaserAligner < Aligner {}` would be a great place to overwrite the `align` method and add
-those parameters.
+some kind of measure of the goodness of the current alignment.
+
+This demo comes with a Nelder–Mead "optimizer" to get things rolling in the direction of this kind of alignment problem: 
+https://ieeexplore.ieee.org/abstract/document/4026448 but any algorithm can be used.
+
+Note: Since alignment/positioning problems can be pretty domain specific, it's probably better to use the `Aligner`
+here as a parent and have your subclass implement introspective logic to match the domain. For example, the 'laser' alignment 
+demo in this readme, may in real life, need to wait a certain dwell time between measurements to allow transient vibrations 
+to damp out sufficiently. This may depend on the step size as well. In that case, a `class LaserAligner < Aligner {}` would
+be a great place to overwrite the `align` method and add those parameters.
 
 ## Use
 
