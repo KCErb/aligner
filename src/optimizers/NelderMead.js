@@ -40,7 +40,8 @@ export default class NelderMead {
     }
 
     // loop
-    for (let iteration = 0; iteration < this.maxIterations; ++iteration) {
+    let iteration;
+    for (iteration = 0; iteration < this.maxIterations; ++iteration) {
       this.sortSimplex();
 
       let maxDiff = 0;
@@ -109,7 +110,7 @@ export default class NelderMead {
           if (this.sigma >= 1) break;
 
           // do a reduction
-          for (i = 1; i < this.simplex.length; ++i) {
+          for (let i = 1; i < this.simplex.length; ++i) {
             this.weightedSum(this.simplex[i], 1 - this.sigma, this.simplex[0], this.sigma, this.simplex[i]);
             this.simplex[i].fx = yield this.simplex[i];
           }
@@ -117,8 +118,9 @@ export default class NelderMead {
       } else {
         this.updateSimplex(this.reflected);
       }
-      // end main loop
-    }
+    } // end main loop
+
+    if (iteration >= this.maxIterations) throw new Error('Max iterations exceeded. Failed to converge.');
     this.sortSimplex();
     return {fx : this.simplex[0].fx, x : this.simplex[0]};
   }
